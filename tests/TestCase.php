@@ -14,9 +14,6 @@ class TestCase extends BaseTestCase
 {
     use RefreshDatabase;
 
-    /**
-     * Load package service provider.
-     */
     protected function getPackageProviders($app): array
     {
         return [
@@ -24,16 +21,15 @@ class TestCase extends BaseTestCase
         ];
     }
 
-    /**
-     * Set up the test environment.
-     */
     protected function setUp(): void
     {
         parent::setUp();
 
-        Schema::dropIfExists('test_models');
+        config(['authored.user_model' => User::class]);
 
-        // Create a test table
+        Schema::dropIfExists('posts');
+        Schema::dropIfExists('users');
+
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -52,8 +48,8 @@ class TestCase extends BaseTestCase
     {
         $user = new User;
         $user->name = fake()->name();
-        $user->email = fake()->email();
-        $user->password = fake()->password();
+
+        $user->save();
 
         return $user;
     }

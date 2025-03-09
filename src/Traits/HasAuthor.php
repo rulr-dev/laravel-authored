@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Auth;
 
 trait HasAuthor
 {
-    /**
-     * Boot the trait and attach event listeners.
-     */
     public static function bootHasAuthor()
     {
         static::creating(function (Model $model) {
@@ -25,5 +22,15 @@ trait HasAuthor
                 $model->$updatedByColumn = Auth::id();
             }
         });
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(config('authored.user_model', \App\Models\User::class), config('authored.created_by', 'created_by'));
+    }
+
+    public function updater()
+    {
+        return $this->belongsTo(config('authored.user_model', \App\Models\User::class), config('authored.updated_by', 'updated_by'));
     }
 }

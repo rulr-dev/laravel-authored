@@ -7,9 +7,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 class AuthoredServiceProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     */
     public function boot(): void
     {
         // Publish config file
@@ -26,9 +23,6 @@ class AuthoredServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         // Merge default config

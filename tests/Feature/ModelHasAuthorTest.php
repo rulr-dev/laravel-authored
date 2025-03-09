@@ -29,6 +29,8 @@ class ModelHasAuthorTest extends TestCase
         // Assertions
         $this->assertEquals($user->id, $post->created_by);
         $this->assertNull($post->updated_by);
+
+        $this->assertInstanceOf(User::class, $post->creator);
     }
 
     /** @test */
@@ -49,6 +51,9 @@ class ModelHasAuthorTest extends TestCase
         // Assertions
         $this->assertEquals($user->id, $post->created_by);
         $this->assertEquals($newUser->id, $post->updated_by);
+
+        $this->assertInstanceOf(User::class, $post->creator);
+        $this->assertInstanceOf(User::class, $post->updater);
     }
 }
 
