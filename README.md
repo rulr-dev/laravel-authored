@@ -48,7 +48,7 @@ By default, this package uses `created_by` and `updated_by` columns. You can **c
 #### **Publishing the Config File**
 
 ```bash
-php artisan vendor:publish --tag=config
+php artisan vendor:publish --provider="Rulr\Authored\AuthoredServiceProvider" --tag=config
 ```
 
 This will create a file at `config/authored.php`, where you can modify the column names:
